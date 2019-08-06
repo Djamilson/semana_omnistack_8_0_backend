@@ -1,23 +1,14 @@
 import { Router } from 'express';
-import multer from 'multer';
-import multerConfig from './config/multer';
+import DevController from './app/controllers/DevController';
 
-import FileController from './app/controllers/FileController';
-import HomeController from './app/controllers/HomeController';
+import LikeController from './app/controllers/LikeController';
+import DisLikeController from './app/controllers/DisLikeController';
 
 const routes = new Router();
-const upload = multer(multerConfig);
 
-/**
- * criar user
- */
-
-/**
- * validar email do user
- *
- */
-
-routes.get('/homes', HomeController.index);
-routes.post('/files', upload.single('file'), FileController.store);
+routes.get('/devs', DevController.index);
+routes.post('/devs', DevController.store);
+routes.post('/devs/:devId/likes', LikeController.store);
+routes.post('/devs/:devId/dislikes', DisLikeController.store);
 
 export default routes;
